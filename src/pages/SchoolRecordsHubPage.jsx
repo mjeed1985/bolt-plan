@@ -28,14 +28,16 @@ const SchoolRecordsHubPage = () => {
         .from('schools')
         .select('name')
         .eq('user_id', user.id)
-        .single();
+        .limit(1);
 
-      if (schoolError && schoolError.code !== 'PGRST116') throw schoolError;
+      if (schoolError) throw schoolError;
       
-      setSchoolInfo({
-        name: schoolData?.name || 'اسم المدرسة (يتم جلبه تلقائياً)',
-        principalName: user.user_metadata?.full_name || user.user_metadata?.name || 'اسم المدير (يتم جلبه تلقائياً)'
-      });
+      if (schoolData && schoolData.length > 0) {
+        setSchoolInfo({
+          name: schoolData[0].name || 'اسم المدرسة (يتم جلبه تلقائياً)',
+          principalName: user.user_metadata?.full_name || user.user_metadata?.name || 'اسم المدير (يتم جلبه تلقائياً)'
+        });
+      }
     } catch (error) {
       console.error('Error fetching school/principal info:', error);
     } finally {

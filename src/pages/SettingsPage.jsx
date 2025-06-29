@@ -38,10 +38,10 @@ const SettingsPage = () => {
         .from('schools')
         .select('name, stage, school_region, school_id_number')
         .eq('user_id', user.id)
-        .single();
+        .limit(1);
 
-      if (data) {
-        setSchoolInfo(data);
+      if (data && data.length > 0) {
+        setSchoolInfo(data[0]);
       } else if (error && error.code !== 'PGRST116') {
         throw error;
       }

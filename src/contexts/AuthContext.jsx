@@ -18,24 +18,19 @@ export const AuthProvider = ({ children }) => {
       return;
     }
     try {
-      const { data: schoolData, error: schoolError } = await supabase
+      const { data, error } = await supabase
         .from('schools')
         .select('id, name')
         .eq('user_id', userId)
-        .single();
+        .limit(1);
 
-      if (schoolError) {
-        if (schoolError.code === 'PGRST116') {
-          console.warn('No school linked to this user yet.');
-          setSchoolId(null);
-          setSchoolName(null);
-        } else {
-          throw schoolError;
-        }
-      } else if (schoolData) {
-        setSchoolId(schoolData.id);
-        setSchoolName(schoolData.name);
+      if (error) {
+        throw error;
+      } else if (data && data.length > 0) {
+        setSchoolId(data[0].id);
+        setSchoolName(data[0].name);
       } else {
+        console.warn('No school linked to this user yet.');
         setSchoolId(null);
         setSchoolName(null);
       }

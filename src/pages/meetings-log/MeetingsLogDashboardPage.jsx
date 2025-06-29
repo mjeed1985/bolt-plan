@@ -29,10 +29,13 @@ const MeetingsLogDashboardPage = () => {
         .from('schools')
         .select('name')
         .eq('user_id', user.id)
-        .single();
+        .limit(1);
 
-      if (schoolError && schoolError.code !== 'PGRST116') throw schoolError;
-      setSchoolInfo(schoolData);
+      if (schoolError) throw schoolError;
+      
+      if (schoolData && schoolData.length > 0) {
+        setSchoolInfo(schoolData[0]);
+      }
       
       // Assuming principal's name might be stored in user's metadata or another table
       // For now, using a placeholder or user's email part
