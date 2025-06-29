@@ -8,7 +8,7 @@ import { Input } from '@/components/ui/input';
 import { Loader2, AlertTriangle, Search, Home, XCircle, ArrowRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-import { PERFORMANCE_SECTIONS_CONFIG } from '@/pages/PerformanceEvidencePage';
+import { PERFORMANCE_SECTIONS_CONFIG } from '@/constants/performanceSections';
 import { SUB_ITEMS_CONFIG } from '@/lib/performanceEvidenceSubItems';
 import SubItemCard from '@/components/performance-evidence/SubItemCard';
 import UploadSubItemDialog from '@/components/performance-evidence/UploadSubItemDialog';

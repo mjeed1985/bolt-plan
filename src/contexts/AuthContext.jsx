@@ -24,13 +24,12 @@ export const AuthProvider = ({ children }) => {
         .eq('user_id', userId)
         .limit(1);
 
-      if (error) {
+      if (error && error.code !== 'PGRST116') {
         throw error;
       } else if (data && data.length > 0) {
         setSchoolId(data[0].id);
         setSchoolName(data[0].name);
       } else {
-        console.warn('No school linked to this user yet.');
         setSchoolId(null);
         setSchoolName(null);
       }
@@ -120,7 +119,7 @@ export const AuthProvider = ({ children }) => {
     navigate('/login');
   };
 
-  const value = {
+  const value = React.useMemo(() => ({
     user,
     schoolId,
     schoolName,
@@ -130,7 +129,7 @@ export const AuthProvider = ({ children }) => {
     setSchoolId,
     setSchoolName,
     fetchSchoolData,
-  };
+  }), [user, schoolId, schoolName, loading, fetchSchoolData]);
 
   return (
     <AuthContext.Provider value={value}>
