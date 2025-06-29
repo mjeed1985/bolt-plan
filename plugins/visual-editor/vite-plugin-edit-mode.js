@@ -11,14 +11,13 @@ export default function inlineEditDevPlugin() {
     name: 'vite:inline-edit-dev',
     apply: 'serve',
     transformIndexHtml() {
-      const scriptPath = resolve(__dirname, 'edit-mode-script.js');
-      const scriptContent = readFileSync(scriptPath, 'utf-8');
-
       return [
         {
           tag: 'script',
-          attrs: { type: 'module' },
-          children: scriptContent,
+          attrs: { 
+            type: 'module',
+            src: '/plugins/visual-editor/edit-mode-script.js'
+          },
           injectTo: 'body'
         },
         {
