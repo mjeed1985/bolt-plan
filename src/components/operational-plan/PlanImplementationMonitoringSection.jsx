@@ -92,6 +92,10 @@ const PlanImplementationMonitoringSection = ({ planData, onChange }) => {
 
   return (
     <div className="space-y-8">
+<<<<<<< HEAD
+=======
+      {/* Header Section */}
+>>>>>>> cd51de4 (initial push)
       <Card className="border-indigo-200 shadow-lg overflow-hidden">
         <CardHeader className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white">
           <CardTitle className="text-xl flex items-center gap-2">
@@ -145,6 +149,10 @@ const PlanImplementationMonitoringSection = ({ planData, onChange }) => {
         </CardContent>
       </Card>
 
+<<<<<<< HEAD
+=======
+      {/* Monitoring Entries */}
+>>>>>>> cd51de4 (initial push)
       <AnimatePresence>
         {monitoringEntries.length > 0 ? (
           <div className="space-y-6">
@@ -175,6 +183,10 @@ const PlanImplementationMonitoringSection = ({ planData, onChange }) => {
                   </CardHeader>
                   <CardContent className="pt-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<<<<<<< HEAD
+=======
+                      {/* رقم المتابعة */}
+>>>>>>> cd51de4 (initial push)
                       <div className="space-y-2">
                         <Label htmlFor={`monitoring-number-${entry.id}`} className="flex items-center gap-2">
                           <ClipboardList className="w-4 h-4 text-indigo-600" />
@@ -197,6 +209,10 @@ const PlanImplementationMonitoringSection = ({ planData, onChange }) => {
                         </Select>
                       </div>
 
+<<<<<<< HEAD
+=======
+                      {/* موعد المتابعة */}
+>>>>>>> cd51de4 (initial push)
                       <div className="space-y-2">
                         <Label htmlFor={`monitoring-period-${entry.id}`} className="flex items-center gap-2">
                           <Calendar className="w-4 h-4 text-green-600" />
@@ -220,6 +236,10 @@ const PlanImplementationMonitoringSection = ({ planData, onChange }) => {
                         </Select>
                       </div>
 
+<<<<<<< HEAD
+=======
+                      {/* الأسبوع */}
+>>>>>>> cd51de4 (initial push)
                       <div className="space-y-2">
                         <Label htmlFor={`week-number-${entry.id}`} className="flex items-center gap-2">
                           <Clock className="w-4 h-4 text-blue-600" />
@@ -243,6 +263,10 @@ const PlanImplementationMonitoringSection = ({ planData, onChange }) => {
                         </Select>
                       </div>
 
+<<<<<<< HEAD
+=======
+                      {/* مستوى التنفيذ */}
+>>>>>>> cd51de4 (initial push)
                       <div className="space-y-2">
                         <Label htmlFor={`implementation-level-${entry.id}`} className="flex items-center gap-2">
                           <TrendingUp className="w-4 h-4 text-purple-600" />
@@ -273,6 +297,10 @@ const PlanImplementationMonitoringSection = ({ planData, onChange }) => {
                         )}
                       </div>
 
+<<<<<<< HEAD
+=======
+                      {/* مؤشرات التحقق */}
+>>>>>>> cd51de4 (initial push)
                       <div className="space-y-2">
                         <Label htmlFor={`achievement-indicator-${entry.id}`} className="flex items-center gap-2">
                           <CheckCircle className="w-4 h-4 text-orange-600" />
@@ -296,6 +324,10 @@ const PlanImplementationMonitoringSection = ({ planData, onChange }) => {
                         </Select>
                       </div>
 
+<<<<<<< HEAD
+=======
+                      {/* ملاحظات */}
+>>>>>>> cd51de4 (initial push)
                       <div className="space-y-2 lg:col-span-3">
                         <Label htmlFor={`notes-${entry.id}`} className="flex items-center gap-2">
                           <AlertCircle className="w-4 h-4 text-gray-600" />
@@ -338,6 +370,10 @@ const PlanImplementationMonitoringSection = ({ planData, onChange }) => {
         )}
       </AnimatePresence>
 
+<<<<<<< HEAD
+=======
+      {/* Summary Section */}
+>>>>>>> cd51de4 (initial push)
       {monitoringEntries.length > 0 && (
         <Card className="border-gray-200 shadow-md">
           <CardHeader className="bg-gradient-to-r from-gray-50 to-gray-100 border-b">
@@ -372,7 +408,11 @@ const PlanImplementationMonitoringSection = ({ planData, onChange }) => {
               <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
                 <p className="text-sm font-medium text-blue-600">متوسط التنفيذ</p>
                 <p className="text-xl font-bold text-blue-800">
+<<<<<<< HEAD
                   {monitoringEntries.length > 0 && monitoringEntries.filter(e => e.implementation_level).length > 0 ? Math.round(
+=======
+                  {monitoringEntries.length > 0 ? Math.round(
+>>>>>>> cd51de4 (initial push)
                     (monitoringEntries.filter(e => e.implementation_level === 'good').length * 100 +
                      monitoringEntries.filter(e => e.implementation_level === 'average').length * 70 +
                      monitoringEntries.filter(e => e.implementation_level === 'weak').length * 40) / 

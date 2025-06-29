@@ -7,7 +7,11 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { GripVertical, ListOrdered, Settings2, Sparkles, Loader2, CheckSquare, HelpCircle } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
 import { motion } from 'framer-motion';
+<<<<<<< HEAD
 import { SCHOOL_ASPECTS_AREAS, DETAILED_ASPECTS_TEMPLATE } from '@/lib/constants/schoolAspectsData';
+=======
+import { SCHOOL_ASPECTS_AREAS, DETAILED_ASPECTS_TEMPLATE } from '@/lib/operationalPlanConstants';
+>>>>>>> cd51de4 (initial push)
 
 const getRankColor = (index) => {
   const colors = [

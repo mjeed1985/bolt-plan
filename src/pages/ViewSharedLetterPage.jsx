@@ -6,7 +6,11 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Checkbox } from '@/components/ui/checkbox';
+<<<<<<< HEAD
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+=======
+import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card';
+>>>>>>> cd51de4 (initial push)
 import { Loader2, AlertTriangle, CheckCircle, Send, User, Phone } from 'lucide-react';
 
 const ViewSharedLetterPage = () => {
@@ -20,7 +24,11 @@ const ViewSharedLetterPage = () => {
     const [submission, setSubmission] = useState({
         acknowledged: false,
         employeeName: '',
+<<<<<<< HEAD
         phone: ''
+=======
+        employeePhone: ''
+>>>>>>> cd51de4 (initial push)
     });
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitted, setSubmitted] = useState(false);
@@ -63,8 +71,13 @@ const ViewSharedLetterPage = () => {
     };
 
     const isFormValid = useMemo(() => {
+<<<<<<< HEAD
         const isNameValid = /^[\u0600-\u06FF\s]{2,}$/.test(submission.employeeName);
         const isPhoneValid = /^[0-9]{10}$/.test(submission.phone);
+=======
+        const isNameValid = /^[\u0600-\u06FF\s]+$/.test(submission.employeeName) && submission.employeeName.trim().length > 2;
+        const isPhoneValid = /^05\d{8}$/.test(submission.employeePhone);
+>>>>>>> cd51de4 (initial push)
         return submission.acknowledged && isNameValid && isPhoneValid;
     }, [submission]);
 
@@ -82,12 +95,20 @@ const ViewSharedLetterPage = () => {
         setIsSubmitting(true);
         try {
             const { error: submitError } = await supabase
+<<<<<<< HEAD
                 .from('announcement_reads')
                 .insert({
                     announcement_id: letter.id,
                     employee_name: submission.employeeName,
                     phone: submission.phone,
                     acknowledged: submission.acknowledged,
+=======
+                .from('letter_acknowledgments')
+                .insert({
+                    letter_id: letter.id,
+                    employee_name: submission.employeeName,
+                    employee_phone: submission.employeePhone
+>>>>>>> cd51de4 (initial push)
                 });
             if (submitError) throw submitError;
 
@@ -112,7 +133,10 @@ const ViewSharedLetterPage = () => {
         return (
             <div className="flex justify-center items-center min-h-screen bg-gray-50 arabic-text">
                 <Loader2 className="h-12 w-12 animate-spin text-sky-600" />
+<<<<<<< HEAD
                 <p className="ml-4 text-xl">جاري تحميل التبليغ...</p>
+=======
+>>>>>>> cd51de4 (initial push)
             </div>
         );
     }
@@ -130,6 +154,7 @@ const ViewSharedLetterPage = () => {
 
     return (
         <div className="min-h-screen bg-gray-100 dark:bg-gray-900 p-4 sm:p-8 flex justify-center items-center arabic-text">
+<<<<<<< HEAD
             <main className="w-full max-w-4xl">
                  <Card className="shadow-2xl">
                     <CardHeader>
@@ -206,6 +231,79 @@ const ViewSharedLetterPage = () => {
                     <p>نظام إدارة المدارس الذكي - تم إنشاؤه بتاريخ: {new Date(letter.created_at).toLocaleDateString('ar-SA')}</p>
                 </footer>
             </main>
+=======
+            <Card className="w-full max-w-4xl shadow-2xl">
+                <CardHeader>
+                    <CardTitle className="text-center text-2xl text-sky-700">
+                        اطلاع على تبليغ إداري
+                    </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-6">
+                    <div className="border rounded-lg overflow-hidden shadow-inner">
+                        <img src={letter.image_url} alt="صورة التبليغ" className="w-full h-auto" />
+                    </div>
+
+                    {submitted ? (
+                        <div className="text-center p-8 bg-green-50 text-green-800 rounded-lg border border-green-200">
+                           <CheckCircle className="h-16 w-16 mx-auto mb-4 text-green-500" />
+                           <h2 className="text-2xl font-bold">شكراً لك</h2>
+                           <p className="mt-2">تم تسجيل اطلاعك على هذا التبليغ بنجاح.</p>
+                        </div>
+                    ) : (
+                        <form onSubmit={handleSubmit} className="space-y-6 border-t pt-6">
+                            <div className="space-y-4">
+                                <div className="flex items-center space-x-2 space-x-reverse">
+                                    <Checkbox id="acknowledged" checked={submission.acknowledged} onCheckedChange={handleCheckboxChange} />
+                                    <Label htmlFor="acknowledged" className="text-lg font-semibold cursor-pointer">
+                                        تم الاطلاع على محتوى التبليغ أعلاه، وأتعهد بالالتزام بما ورد فيه.
+                                    </Label>
+                                </div>
+                                <div className="space-y-2">
+                                    <Label htmlFor="employeeName">اسم الموظف</Label>
+                                    <div className="relative">
+                                        <User className="absolute right-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+                                        <Input
+                                            id="employeeName"
+                                            name="employeeName"
+                                            value={submission.employeeName}
+                                            onChange={handleInputChange}
+                                            placeholder="الاسم الثلاثي (باللغة العربية)"
+                                            required
+                                            pattern="^[\u0600-\u06FF\s]+$"
+                                            className="pr-10"
+                                        />
+                                    </div>
+                                </div>
+                                <div className="space-y-2">
+                                    <Label htmlFor="employeePhone">رقم الجوال</Label>
+                                    <div className="relative">
+                                         <Phone className="absolute right-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+                                        <Input
+                                            id="employeePhone"
+                                            name="employeePhone"
+                                            value={submission.employeePhone}
+                                            onChange={handleInputChange}
+                                            placeholder="05XXXXXXXX (10 أرقام)"
+                                            required
+                                            maxLength="10"
+                                            pattern="^05\d{8}$"
+                                            className="pr-10"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                            <Button type="submit" disabled={!isFormValid || isSubmitting} className="w-full text-lg py-6 bg-sky-600 hover:bg-sky-700">
+                                {isSubmitting ? <Loader2 className="ml-2 h-5 w-5 animate-spin" /> : <Send className="ml-2 h-5 w-5" />}
+                                إرسال
+                            </Button>
+                        </form>
+                    )}
+                </CardContent>
+                 <CardFooter className="text-center text-xs text-gray-500 justify-center">
+                    <p>نظام إدارة المدارس الذكي - تم إنشاؤه بتاريخ: {new Date(letter.created_at).toLocaleDateString('ar-SA')}</p>
+                </CardFooter>
+            </Card>
+>>>>>>> cd51de4 (initial push)
         </div>
     );
 };

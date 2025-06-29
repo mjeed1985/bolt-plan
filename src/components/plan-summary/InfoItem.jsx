@@ -8,6 +8,7 @@ const InfoItem = ({ label, value, icon, isList = false, subListKey = 'name' }) =
       {isList && Array.isArray(value) ? (
         value.length > 0 ? (
           <ul className="list-disc list-inside pl-2 text-md text-gray-800 space-y-1 mt-1">
+<<<<<<< HEAD
             {value.map((item, index) => {
               let displayItem = "غير محدد";
               if (item !== null && item !== undefined) {
@@ -27,11 +28,21 @@ const InfoItem = ({ label, value, icon, isList = false, subListKey = 'name' }) =
                 </li>
               );
             })}
+=======
+            {value.map((item, index) => (
+              <li key={index} className="leading-relaxed">
+                {typeof item === 'object' && item !== null ? item[subListKey] : item}
+                {typeof item === 'object' && item !== null && item.count !== undefined && ` ( العدد: ${item.count} )`}
+                {typeof item === 'object' && item !== null && item.specialization === 'other' && item.custom_specialization && ` ( التخصص: ${item.custom_specialization} )`}
+              </li>
+            ))}
+>>>>>>> cd51de4 (initial push)
           </ul>
         ) : (
           <p className="text-md text-gray-700 mt-0.5">غير محدد</p>
         )
       ) : (
+<<<<<<< HEAD
         <p className="text-md text-gray-800 break-words whitespace-pre-line mt-0.5">
           {(() => {
             if (value === null || value === undefined || value === '') return 'غير محدد';
@@ -42,6 +53,9 @@ const InfoItem = ({ label, value, icon, isList = false, subListKey = 'name' }) =
             return String(value);
           })()}
         </p>
+=======
+        <p className="text-md text-gray-800 break-words whitespace-pre-line mt-0.5">{value || "غير محدد"}</p>
+>>>>>>> cd51de4 (initial push)
       )}
     </div>
   </div>
