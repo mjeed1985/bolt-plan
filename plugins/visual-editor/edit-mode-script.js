@@ -1,4 +1,4 @@
-import { POPUP_STYLES, getPopupHTMLTemplate } from './plugins/visual-editor/visual-editor-config.js';
+import { POPUP_STYLES, getPopupHTMLTemplate } from './visual-editor-config.js';
 
 const PLUGIN_APPLY_EDIT_API_URL = '/api/apply-edit';
 
@@ -151,8 +151,8 @@ async function handlePopupSave() {
   
   const newText = popupTextarea.value
   // Replacing characters that cause Babel parser to crash
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
+    .replace(/</g, '<')
+    .replace(/>/g, '>')
     .replace(/{/g, '&#123;')
     .replace(/}/g, '&#125;')
 
@@ -318,4 +318,4 @@ window.addEventListener("message", function(event) {
   if (event.data?.type === "disable-edit-mode") {
     disableEditMode();
   }
-}); 
+});
