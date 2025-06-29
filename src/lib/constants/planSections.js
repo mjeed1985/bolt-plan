@@ -1,0 +1,20 @@
+export const PLAN_SECTIONS = [
+  { id: 'info', title: 'المعلومات الأساسية للخطة التشغيلية' },
+  { id: 'structure_team', title: 'هيكل وفريق إعداد الخطة' },
+  { id: 'school_excellence_committee', title: 'لجنة التميز المدرسي' },
+  { id: 'education_strategic_goals', title: 'الاهداف الاستراتيجية للتعليم' },
+  { id: 'school_staff_data', title: 'منسوبي المدرسة' },
+  { id: 'plan_sources', title: 'مصادر بناء الخطة' },
+  { id: 'school_aspects_prioritization', title: 'الجوانب المدرسية العامة وترتيبها (أولويات التطوير والتحسين)' },
+  { id: 'self_assessment_beneficiaries', title: 'مجالات التقويم الذاتي والمستفيدون' },
+  { id: 'swot', title: 'التحليل الرباعي (SWOT)' },
+  { id: 'ethics', title: 'الميثاق الأخلاقي والقيم الأساسية' },
+  { id: 'goals', title: 'الأهداف الاستراتيجية والتفصيلية للمدرسة' },
+  { id: 'programs', title: 'البرامج والمبادرات التنفيذية' },
+  { id: 'tech', title: 'استراتيجية التحول الرقمي في التعليم' },
+  { id: 'plan_monitoring', title: 'متابعة تنفيذ الخطة من قبل الإدارة المدرسية' },
+  { id: 'risks', title: 'إدارة المخاطر والتحديات المتوقعة' },
+  { id: 'partnerships', title: 'الشراكات المجتمعية والمؤسسية' },
+  { id: 'staff', title: 'تنمية الكادر التعليمي والإداري' },
+  { id: 'evaluation', title: 'التقويم والمتابعة والجدول الزمني' }
+];

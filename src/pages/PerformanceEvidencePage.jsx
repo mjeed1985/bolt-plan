@@ -1,0 +1,226 @@
+import React, { useState, useEffect, useCallback } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import { useAuth } from '@/contexts/AuthContext';
+import { useToast } from '@/components/ui/use-toast';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Loader2, AlertTriangle, Search, Home, XCircle, ClipboardList, KeyRound as UsersRound, MessageSquare, Zap, Sparkles, ShieldAlert, DollarSign, UserCog, CheckCircle2, UserCheck, BarChartBig, FileSignature, TrendingUp, ClipboardCheck, Goal, Users2 as UsersThree, MonitorPlay, SmilePlus, Building, ArrowRight } from 'lucide-react';
+import { motion } from 'framer-motion';
+
+import PerformanceEvidenceLanding from '@/components/performance-evidence/PerformanceEvidenceLanding';
+import ImportantInfoDialog from '@/components/performance-evidence/ImportantInfoDialog';
+import ThemeToggle from '@/components/ui/ThemeToggle';
+
+export const PERFORMANCE_SECTIONS_CONFIG = [
+  { id: 0, title: 'أداء الواجبات الوظيفية', color: 'from-sky-500 to-sky-600', icon: <ClipboardList className="w-10 h-10 sm:w-12 sm:h-12 text-white" /> },
+  { id: 1, title: 'التفاعل مع المجتمع المهني', color: 'from-indigo-500 to-indigo-600', icon: <UsersRound className="w-10 h-10 sm:w-12 sm:h-12 text-white" /> },
+  { id: 2, title: 'التفاعل مع أولياء الأمور', color: 'from-purple-500 to-purple-600', icon: <MessageSquare className="w-10 h-10 sm:w-12 sm:h-12 text-white" /> },
+  { id: 3, title: 'مرن وقادر على تنفيذ أعماله في ظل ظروف العمل المختلفة', color: 'from-pink-500 to-pink-600', icon: <Zap className="w-10 h-10 sm:w-12 sm:h-12 text-white" /> },
+  { id: 4, title: 'يدعم ويشارك في المبادرات النوعية', color: 'from-red-500 to-red-600', icon: <Sparkles className="w-10 h-10 sm:w-12 sm:h-12 text-white" /> },
+  { id: 5, title: 'يتخذ إجراءات تربوية تحقق الانضباط المدرسي', color: 'from-orange-500 to-orange-600', icon: <ShieldAlert className="w-10 h-10 sm:w-12 sm:h-12 text-white" /> },
+  { id: 6, title: 'يدير الموارد في المدرسة بكفاءة', color: 'from-amber-500 to-amber-600', icon: <DollarSign className="w-10 h-10 sm:w-12 sm:h-12 text-white" /> },
+  { id: 7, title: 'يعد خطة للتطوير المهني', color: 'from-yellow-500 to-yellow-600', icon: <UserCog className="w-10 h-10 sm:w-12 sm:h-12 text-white" /> },
+  { id: 8, title: 'يقدم التغذية الراجعة ويتابع تحقق مؤشرات الأداء الوظيفي', color: 'from-lime-500 to-lime-600', icon: <CheckCircle2 className="w-10 h-10 sm:w-12 sm:h-12 text-white" /> },
+  { id: 9, title: 'يدعم تنفيذ برامج التطوير المهني', color: 'from-green-500 to-green-600', icon: <UserCheck className="w-10 h-10 sm:w-12 sm:h-12 text-white" /> },
+  { id: 10, title: 'يقيم أداء منسوبي المدرسة', color: 'from-emerald-500 to-emerald-600', icon: <BarChartBig className="w-10 h-10 sm:w-12 sm:h-12 text-white" /> },
+  { id: 11, title: 'ينفذ إجراءات علمية لتحسين نتائج التعلم', color: 'from-teal-500 to-teal-600', icon: <FileSignature className="w-10 h-10 sm:w-12 sm:h-12 text-white" /> },
+  { id: 12, title: 'يسهم في تحسين مستوى أداء المدرسة', color: 'from-cyan-500 to-cyan-600', icon: <TrendingUp className="w-10 h-10 sm:w-12 sm:h-12 text-white" /> },
+  { id: 13, title: 'يعد الخطط المدرسية اللازمة', color: 'from-blue-500 to-blue-600', icon: <ClipboardCheck className="w-10 h-10 sm:w-12 sm:h-12 text-white" /> },
+  { id: 14, title: 'يتابع تنفيذ الخطط المدرسية بمختلف أنواعها', color: 'from-violet-500 to-violet-600', icon: <Goal className="w-10 h-10 sm:w-12 sm:h-12 text-white" /> },
+  { id: 15, title: 'يهيئ الفرص والإمكانات الداعمة لمشاركة الطلاب في الأنشطة الصفية وغير الصفية', color: 'from-fuchsia-500 to-fuchsia-600', icon: <UsersThree className="w-10 h-10 sm:w-12 sm:h-12 text-white" /> },
+  { id: 16, title: 'يوظف المنصات الرقمية وتطبيقاتها المعتمدة في دعم عمليات التعليم والتعلم', color: 'from-rose-500 to-rose-600', icon: <MonitorPlay className="w-10 h-10 sm:w-12 sm:h-12 text-white" /> },
+  { id: 17, title: 'يتابع تعزيز السلوك الإيجابي للطلاب', color: 'from-slate-500 to-slate-600', icon: <SmilePlus className="w-10 h-10 sm:w-12 sm:h-12 text-white" /> },
+  { id: 18, title: 'يهيئ بيئة مدرسية آمنة ومحفزة على التعلم', color: 'from-gray-500 to-gray-600', icon: <Building className="w-10 h-10 sm:w-12 sm:h-12 text-white" /> },
+];
+
+
+const PerformanceEvidencePage = () => {
+  const { user, schoolId, schoolName } = useAuth();
+  const navigate = useNavigate();
+  const { toast } = useToast();
+
+  const [loading, setLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [showLandingPage, setShowLandingPage] = useState(true);
+  const [showImportantInfoDialog, setShowImportantInfoDialog] = useState(false);
+
+  const loadData = useCallback(async () => {
+    if (!user || !schoolId) {
+      setLoading(false);
+      return;
+    }
+    setLoading(false); 
+  }, [user, schoolId]);
+
+  useEffect(() => {
+    if (!user) {
+      navigate('/login');
+    } else if (!schoolId) {
+       setLoading(false); 
+    } else {
+      loadData();
+    }
+  }, [user, schoolId, navigate, loadData]);
+
+
+  const filteredSectionsConfig = PERFORMANCE_SECTIONS_CONFIG.filter(section => 
+    section.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const handleStartDocumenting = () => {
+    setShowLandingPage(false);
+  };
+
+  const handleShowImportantInfo = () => {
+    setShowImportantInfoDialog(true);
+  };
+
+  if (!user) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-screen bg-red-50 dark:bg-red-900/20 p-8 arabic-text">
+        <AlertTriangle className="h-20 w-20 text-red-500 mb-6 animate-pulse" />
+        <h1 className="text-3xl font-bold text-red-700 dark:text-red-400 mb-3">غير مصرح بالوصول</h1>
+        <p className="text-lg text-foreground mb-6 text-center">
+          يجب عليك تسجيل الدخول أولاً للوصول إلى هذه الصفحة.
+        </p>
+        <Button onClick={() => navigate('/login')} className="bg-red-600 hover:bg-red-700 text-white text-lg px-8 py-3 rounded-lg shadow-lg transition-transform hover:scale-105">
+          تسجيل الدخول
+        </Button>
+      </div>
+    );
+  }
+  
+  if (!schoolId && !loading) {
+    return (
+        <div className="flex flex-col items-center justify-center min-h-screen bg-orange-50 dark:bg-orange-900/20 p-8 arabic-text">
+            <AlertTriangle className="h-20 w-20 text-orange-500 mb-6 animate-pulse" />
+            <h1 className="text-3xl font-bold text-orange-700 dark:text-orange-400 mb-3">خطأ: معرّف المدرسة غير متوفر</h1>
+            <p className="text-lg text-foreground mb-6 text-center max-w-md">
+                لا يمكن عرض أو إدارة شواهد الأداء بدون معرّف مدرسة صالح مرتبط بحسابك. يرجى التأكد من أن حسابك مرتبط بمدرسة بشكل صحيح.
+            </p>
+            <Button onClick={() => navigate('/dashboard')} className="bg-sky-600 hover:bg-sky-700 text-white text-lg px-8 py-3 rounded-lg shadow-lg transition-transform hover:scale-105 flex items-center gap-2">
+                <Home className="w-5 h-5" /> العودة إلى لوحة التحكم
+            </Button>
+        </div>
+    );
+  }
+
+  if (showLandingPage) {
+    return (
+      <>
+        <PerformanceEvidenceLanding 
+          onStartDocumenting={handleStartDocumenting}
+          onShowImportantInfo={handleShowImportantInfo}
+          onNavigateToDashboard={() => navigate('/dashboard')}
+        />
+        <ImportantInfoDialog 
+          isOpen={showImportantInfoDialog} 
+          onOpenChange={setShowImportantInfoDialog} 
+        />
+      </>
+    );
+  }
+
+  if (loading) {
+    return (
+      <div className="flex flex-col justify-center items-center min-h-screen bg-background p-8 arabic-text">
+        <Loader2 className="h-16 w-16 text-primary animate-spin mb-4" />
+        <p className="text-xl text-foreground font-semibold">جاري تحميل...</p>
+      </div>
+    );
+  }
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: (i) => ({
+      opacity: 1,
+      y: 0,
+      transition: {
+        delay: i * 0.05,
+        duration: 0.3,
+        ease: "easeOut"
+      }
+    })
+  };
+
+  return (
+    <div className="min-h-screen bg-background p-4 sm:p-8 arabic-text">
+      <header className="mb-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+        <div>
+          <h1 className="text-2xl sm:text-3xl font-bold text-foreground">
+            شواهد الأداء الوظيفي لمدير المدرسة
+          </h1>
+          <p className="text-muted-foreground text-md">{schoolName || 'مدرستك'}</p>
+        </div>
+        <div className="flex items-center gap-4 w-full sm:w-auto">
+          <ThemeToggle />
+          <Button onClick={() => setShowLandingPage(true)} variant="outline">
+            <Home className="ml-2 w-4 h-4" /> الواجهة
+          </Button>
+        </div>
+      </header>
+      
+      <div className="mb-6 relative flex-grow sm:flex-grow-0 w-full sm:w-auto max-w-md">
+        <Input
+          type="text"
+          placeholder="ابحث عن قسم..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="pl-10 pr-4 py-2 rounded-lg w-full arabic-text shadow-sm"
+        />
+        <Search className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-5 h-5" />
+      </div>
+
+      {filteredSectionsConfig.length === 0 && searchTerm !== '' && (
+        <Card className="shadow-xl bg-card border-0 mb-6">
+          <CardContent className="p-6 text-center">
+            <XCircle className="w-16 h-16 text-orange-400 mx-auto mb-4" />
+            <p className="text-xl font-semibold text-foreground">لا توجد أقسام مطابقة</p>
+            <p className="text-muted-foreground">لم يتم العثور على أقسام تطابق مصطلح البحث "{searchTerm}".</p>
+          </CardContent>
+        </Card>
+      )}
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        {filteredSectionsConfig.map((section, index) => (
+          <motion.div
+            key={section.id}
+            custom={index}
+            variants={cardVariants}
+            initial="hidden"
+            animate="visible"
+          >
+            <Link to={`/performance-evidence/${section.id}`} className="block group">
+              <Card className={`shadow-lg hover:shadow-2xl transition-all duration-300 ease-in-out transform hover:-translate-y-1 bg-gradient-to-br ${section.color} text-white rounded-xl overflow-hidden h-full flex flex-col`}>
+                <CardHeader className="p-6 flex-grow flex flex-col items-center justify-center text-center">
+                  <motion.div 
+                    whileHover={{ scale: 1.1, rotate: 5 }} 
+                    transition={{ type: "spring", stiffness: 300 }}
+                    className="mb-4 p-3 bg-white/20 rounded-full shadow-inner"
+                  >
+                    {section.icon}
+                  </motion.div>
+                  <CardTitle className="text-lg sm:text-xl font-bold leading-tight">{section.title}</CardTitle>
+                </CardHeader>
+                <CardContent className="p-4 bg-black/10 backdrop-blur-sm">
+                  <div className="flex justify-between items-center text-sm font-medium">
+                    <span>فتح القسم</span>
+                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  </div>
+                </CardContent>
+              </Card>
+            </Link>
+          </motion.div>
+        ))}
+      </div>
+      
+      <ImportantInfoDialog 
+        isOpen={showImportantInfoDialog} 
+        onOpenChange={setShowImportantInfoDialog} 
+      />
+    </div>
+  );
+};
+
+export default PerformanceEvidencePage;

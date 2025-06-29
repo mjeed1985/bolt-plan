@@ -1,0 +1,65 @@
+// Re-export all constants from their respective modules
+export { PLAN_SECTIONS } from './constants/planSections';
+export { 
+  SCHOOL_STAGES, 
+  STUDENT_GENDER_TYPES, 
+  BUILDING_TYPES, 
+  PLAN_NATURES, 
+  ACADEMIC_YEAR_OPTIONS,
+  EDUCATION_DEPARTMENTS,
+  SCHOOL_FACILITIES_OPTIONS,
+  FACILITY_COUNT_OPTIONS
+} from './constants/schoolData';
+export { 
+  JOB_TITLES_KSA, 
+  COMMITTEE_MEMBER_ROLES, 
+  STAFF_SPECIALIZATIONS_KSA, 
+  TRAINING_AREAS,
+  SCHOOL_FORMATIONS_OPTIONS
+} from './constants/staffData';
+export { 
+  GENERAL_EDUCATION_STRATEGIC_GOALS,
+  KINDERGARTEN_GOALS,
+  PRIMARY_SCHOOL_GOALS,
+  MIDDLE_SCHOOL_GOALS,
+  SECONDARY_SCHOOL_GOALS,
+  IMPLEMENTATION_STRATEGIES
+} from './constants/educationGoals';
+export { 
+  EVALUATION_MECHANISMS,
+  SUCCESS_INDICATORS_EXAMPLES,
+  KPI_OPTIONS,
+  MONITORING_SCHEDULE_EXAMPLES,
+  EVALUATION_TOOLS_EXAMPLES,
+  EVALUATION_TOOLS
+} from './constants/evaluationData';
+export { SWOT_CATEGORIES } from './constants/swotData';
+export { 
+  PARTNERSHIP_TYPES,
+  PARTNERSHIP_AREAS,
+  PARTNERSHIP_STATUS
+} from './constants/partnershipData';
+export { 
+  TECH_LEVELS,
+  TECH_GOALS,
+  TECH_TOOLS
+} from './constants/techData';
+export { 
+  RISK_CATEGORIES,
+  RISK_SEVERITY_LEVELS,
+  RISK_STRATEGIES,
+  RISK_RESPONSIBLE_PARTIES,
+  RESPONSIBLE_PARTIES
+} from './constants/riskData';
+export { CORE_VALUES_LIST } from './constants/ethicsData';
+export { 
+  SCHOOL_ASPECTS_AREAS,
+  DETAILED_ASPECTS_TEMPLATE
+} from './constants/schoolAspectsData';
+export { 
+  MONITORING_NUMBERS,
+  MONITORING_PERIODS,
+  MONITORING_WEEKS,
+  IMPLEMENTATION_LEVELS,
+  ACHIEVEMENT_INDICATORS
+} from './constants/monitoringData';
