@@ -16,7 +16,6 @@ import ViewEvidenceDialog from '@/components/performance-evidence/ViewEvidenceDi
 import ThemeToggle from '@/components/ui/ThemeToggle';
 
 const sanitizeFileName = (fileName) => {
-<<<<<<< HEAD
   const decodedFileName = decodeURIComponent(fileName.trim());
   let sanitized = decodedFileName.replace(/\s+/g, '_');
   sanitized = sanitized.replace(/[^a-zA-Z0-9_.-]/g, '');
@@ -35,14 +34,6 @@ const sanitizeFileName = (fileName) => {
   }
 
   return sanitized;
-=======
-  const lowerCaseName = fileName.toLowerCase();
-  if (lowerCaseName.endsWith('.png.png')) return fileName.slice(0, -4);
-  if (lowerCaseName.endsWith('.jpg.jpg')) return fileName.slice(0, -4);
-  if (lowerCaseName.endsWith('.jpeg.jpeg')) return fileName.slice(0, -5);
-  if (lowerCaseName.endsWith('.pdf.pdf')) return fileName.slice(0, -4);
-  return fileName;
->>>>>>> cd51de4 (initial push)
 };
 
 const PerformanceEvidenceSectionPage = () => {

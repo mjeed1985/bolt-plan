@@ -8,11 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Wand2, Loader2, Users, UserCheck, Edit } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
-<<<<<<< HEAD
 const LetterForm = ({ letterData, setLetterData, type, pageTitle, isGenerating, onGenerateContent, onCreateFinalLetter, isApiKeyLoading, isModelReady, isCreatingPreview }) => {
-=======
-const LetterForm = ({ letterData, setLetterData, type, pageTitle, isGenerating, onGenerateContent, onCreateFinalLetter, isApiKeyLoading, isModelReady }) => {
->>>>>>> cd51de4 (initial push)
   const [isEditing, setIsEditing] = useState(false);
   const [editedContent, setEditedContent] = useState(letterData.customContent);
 
@@ -39,11 +35,8 @@ const LetterForm = ({ letterData, setLetterData, type, pageTitle, isGenerating, 
       ? "bg-pink-100 hover:bg-pink-200 text-pink-700 border-pink-300 shadow-md scale-105" 
       : "border-gray-300 hover:bg-gray-50"
   );
-<<<<<<< HEAD
   
   const isCreateButtonDisabled = !letterData.customContent.trim() || !letterData.title.trim() || (type === 'external' && !letterData.recipient.trim()) || isCreatingPreview;
-=======
->>>>>>> cd51de4 (initial push)
 
   return (
     <motion.div initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
@@ -148,18 +141,11 @@ const LetterForm = ({ letterData, setLetterData, type, pageTitle, isGenerating, 
           <div className="flex justify-center">
             <Button 
               onClick={onCreateFinalLetter} 
-<<<<<<< HEAD
               disabled={isCreateButtonDisabled} 
               className="gradient-bg-2 text-white px-8 flex items-center gap-2"
             >
               {isCreatingPreview ? <Loader2 className="w-5 h-5 animate-spin" /> : null}
               {isCreatingPreview ? `جاري إنشاء المعاينة...` : `معاينة وإنشاء ${pageTitle.slice(0,-1)}`}
-=======
-              disabled={!letterData.customContent.trim() || !letterData.title.trim() || (type === 'external' && !letterData.recipient.trim())} 
-              className="gradient-bg-2 text-white px-8"
-            >
-              معاينة وإنشاء {pageTitle.slice(0,-1)}
->>>>>>> cd51de4 (initial push)
             </Button>
           </div>
         </CardContent>

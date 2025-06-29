@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { createContext, useState, useContext, useEffect } from 'react';
 
 const LetterTemplatesContext = createContext();
@@ -45,47 +44,3 @@ export const LetterTemplatesProvider = ({ children }) => {
 };
 
 export const useLetterTemplates = () => useContext(LetterTemplatesContext);
-=======
-import React, { createContext, useContext, useState, useEffect } from 'react';
-
-const LetterImageContext = createContext();
-
-export const useLetterImage = () => {
-  const context = useContext(LetterImageContext);
-  if (!context) {
-    throw new Error('useLetterImage must be used within a LetterImageProvider');
-  }
-  return context;
-};
-
-export const LetterImageProvider = ({ children }) => {
-  const [letterImage, setLetterImage] = useState(null);
-
-  useEffect(() => {
-    const storedImage = localStorage.getItem('letterOfficialImage');
-    if (storedImage) {
-      setLetterImage(storedImage);
-    }
-  }, []);
-
-  const updateLetterImage = (newImage) => {
-    setLetterImage(newImage);
-    if (newImage) {
-        localStorage.setItem('letterOfficialImage', newImage);
-    } else {
-        localStorage.removeItem('letterOfficialImage');
-    }
-  };
-
-  const value = {
-    letterImage,
-    setLetterImage: updateLetterImage,
-  };
-
-  return (
-    <LetterImageContext.Provider value={value}>
-      {children}
-    </LetterImageContext.Provider>
-  );
-};
->>>>>>> cd51de4 (initial push)

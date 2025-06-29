@@ -1,17 +1,10 @@
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-<<<<<<< HEAD
 import { Eye, Trash2, Users, Share2 } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const SavedLettersList = ({ savedLetters, pageTitle, onLoadLetter, onDeleteLetter, onViewAcknowledgements, onShareLetter, type }) => {
-=======
-import { Eye, Trash2 } from 'lucide-react';
-import { motion } from 'framer-motion';
-
-const SavedLettersList = ({ savedLetters, pageTitle, onLoadLetter, onDeleteLetter }) => {
->>>>>>> cd51de4 (initial push)
   if (!savedLetters || savedLetters.length === 0) {
     return (
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }}>
@@ -40,7 +33,6 @@ const SavedLettersList = ({ savedLetters, pageTitle, onLoadLetter, onDeleteLette
                   <Button size="sm" variant="outline" onClick={() => onLoadLetter(l)} className="flex items-center gap-1">
                     <Eye className="w-4 h-4"/> عرض
                   </Button>
-<<<<<<< HEAD
                    {(type === 'notification' || type === 'bulletin') && l.db_id && (
                     <>
                       <Button 
@@ -61,8 +53,6 @@ const SavedLettersList = ({ savedLetters, pageTitle, onLoadLetter, onDeleteLette
                       </Button>
                     </>
                    )}
-=======
->>>>>>> cd51de4 (initial push)
                   <Button size="sm" variant="destructive" onClick={() => onDeleteLetter(l.id)} className="flex items-center gap-1">
                     <Trash2 className="w-4 h-4"/> حذف
                   </Button>

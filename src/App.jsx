@@ -19,11 +19,8 @@ import CreateOperationalPlanPage from '@/pages/CreateOperationalPlanPage';
 import PlanSummaryDashboardPage from '@/pages/PlanSummaryDashboardPage';
 import SchoolRecordsHubPage from '@/pages/SchoolRecordsHubPage';
 import ViewSharedLetterPage from '@/pages/ViewSharedLetterPage';
-<<<<<<< HEAD
 import ViewAcknowledgementsPage from '@/pages/ViewAcknowledgementsPage';
 import ViewSharedPlanPage from '@/pages/ViewSharedPlanPage';
-=======
->>>>>>> cd51de4 (initial push)
 
 import MeetingsLogDashboardPage from '@/pages/meetings-log/MeetingsLogDashboardPage';
 import CommitteesMeetingsPage from '@/pages/meetings-log/CommitteesMeetingsPage';
@@ -49,10 +46,6 @@ import AdminDashboardPage from '@/pages/admin/AdminDashboardPage';
 import AdminUsersPage from '@/pages/admin/AdminUsersPage';
 import { useTheme } from '@/contexts/ThemeProvider';
 
-<<<<<<< HEAD
-=======
-// AppRoutes component is removed, Routes are directly in App
->>>>>>> cd51de4 (initial push)
 function App() {
   const { theme } = useTheme();
   return (
@@ -61,12 +54,8 @@ function App() {
         {/* Public Routes */}
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
-<<<<<<< HEAD
         <Route path="/announcement/view/:token" element={<ViewSharedLetterPage />} />
         <Route path="/operational-plans/view/:planId" element={<ViewSharedPlanPage />} />
-=======
-        <Route path="/letter/view/:token" element={<ViewSharedLetterPage />} />
->>>>>>> cd51de4 (initial push)
         
         {/* User Authenticated Routes */}
         <Route path="/dashboard" element={<DashboardPage />} />
@@ -77,11 +66,8 @@ function App() {
         <Route path="/letters/external" element={<LetterPage type="external" title="الخطابات الخارجية" />} />
         <Route path="/letters/bulletins" element={<LetterPage type="bulletin" title="النشرات الداخلية" />} />
         <Route path="/letters/notifications" element={<LetterPage type="notification" title="التبليغات الإدارية" />} />
-<<<<<<< HEAD
         <Route path="/announcement/admin/:id" element={<ViewAcknowledgementsPage />} />
 
-=======
->>>>>>> cd51de4 (initial push)
         <Route path="/performance-evidence" element={<PerformanceEvidencePage />} />
         <Route path="/performance-evidence/:sectionId" element={<PerformanceEvidenceSectionPage />} />
         <Route path="/surveys" element={<SurveyPage />} />
@@ -117,10 +103,6 @@ function App() {
           <Route index element={<Navigate to="dashboard" replace />} />
           <Route path="dashboard" element={<AdminDashboardPage />} />
           <Route path="users" element={<AdminUsersPage />} />
-<<<<<<< HEAD
-=======
-          {/* <Route path="settings" element={<AdminSettingsPage />} /> */}
->>>>>>> cd51de4 (initial push)
         </Route>
 
       </Routes>

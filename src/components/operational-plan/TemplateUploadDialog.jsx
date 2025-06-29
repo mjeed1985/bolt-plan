@@ -7,7 +7,6 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Loader2, UploadCloud, X } from 'lucide-react';
 
-<<<<<<< HEAD
 const sanitizeFileName = (fileName) => {
   const decodedFileName = decodeURIComponent(fileName.trim());
   let sanitized = decodedFileName.replace(/\s+/g, '_');
@@ -27,17 +26,6 @@ const sanitizeFileName = (fileName) => {
   }
 
   return sanitized;
-=======
-const cleanFileName = (fileName) => {
-  const parts = fileName.split('.');
-  if (parts.length > 1) {
-    const ext = parts.pop();
-    const name = parts.join('.');
-    const cleanedName = name.replace(new RegExp(`\\.${ext}$`, 'i'), '');
-    return `${cleanedName}.${ext}`;
-  }
-  return fileName;
->>>>>>> cd51de4 (initial push)
 };
 
 const TemplateUploadDialog = ({ isOpen, onOpenChange, onTemplateUpload, templateType, schoolId, title, description }) => {
@@ -79,24 +67,16 @@ const TemplateUploadDialog = ({ isOpen, onOpenChange, onTemplateUpload, template
     }
 
     setIsUploading(true);
-<<<<<<< HEAD
     const cleanedName = sanitizeFileName(selectedFile.name);
-=======
-    const cleanedName = cleanFileName(selectedFile.name);
->>>>>>> cd51de4 (initial push)
     const fileName = `${Date.now()}_${cleanedName}`;
     const filePath = `${schoolId}/letter_templates/${fileName}`;
 
     try {
       const { error: uploadError } = await supabase.storage
         .from('performance-evidence')
-<<<<<<< HEAD
         .upload(filePath, selectedFile, {
             upsert: true,
         });
-=======
-        .upload(filePath, selectedFile);
->>>>>>> cd51de4 (initial push)
 
       if (uploadError) throw uploadError;
 
@@ -105,19 +85,12 @@ const TemplateUploadDialog = ({ isOpen, onOpenChange, onTemplateUpload, template
         .getPublicUrl(filePath);
 
       if (!publicUrl) throw new Error("Could not get public URL for the uploaded file.");
-<<<<<<< HEAD
       
       const fullPublicUrl = `${publicUrl}?t=${new Date().getTime()}`;
 
       const { error: dbError } = await supabase
         .from('schools')
         .update({ [templateType]: fullPublicUrl })
-=======
-
-      const { error: dbError } = await supabase
-        .from('schools')
-        .update({ [templateType]: publicUrl })
->>>>>>> cd51de4 (initial push)
         .eq('id', schoolId);
 
       if (dbError) throw dbError;
@@ -126,11 +99,7 @@ const TemplateUploadDialog = ({ isOpen, onOpenChange, onTemplateUpload, template
         title: "نجاح",
         description: "تم رفع القالب بنجاح.",
       });
-<<<<<<< HEAD
       onTemplateUpload(fullPublicUrl);
-=======
-      onTemplateUpload(publicUrl);
->>>>>>> cd51de4 (initial push)
       handleClose();
     } catch (error) {
       console.error('Error uploading template:', error);

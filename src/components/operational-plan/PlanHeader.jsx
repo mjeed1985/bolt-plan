@@ -68,15 +68,8 @@ const PlanHeader = ({ planId, planName, currentSectionIndex, totalSections, onNa
         onOpenChange={setIsUploadDialogOpen}
         title="رفع قالب الخطة التشغيلية"
         description="ارفع قالب بصيغة صورة (أفقي) ليتم استخدامه كخلفية عند تصدير الخطة."
-<<<<<<< HEAD
         templateType="operational_plan_template_url"
         onTemplateUpload={onTemplateUploadSuccess}
-=======
-        storagePath="plan_templates"
-        dbColumnName="operational_plan_template_url"
-        onUploadSuccess={onTemplateUploadSuccess}
-        orientation="landscape"
->>>>>>> cd51de4 (initial push)
       />
     </>
   );

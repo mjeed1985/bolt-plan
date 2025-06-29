@@ -4,11 +4,7 @@ import { Button } from '@/components/ui/button';
 import { useToast } from '@/components/ui/use-toast';
 import { supabase } from '@/lib/supabase';
 import { useAuth } from '@/contexts/AuthContext';
-<<<<<<< HEAD
 import { Download, Share2, Loader2 } from 'lucide-react';
-=======
-import { Download, Share2, Copy, Loader2 } from 'lucide-react';
->>>>>>> cd51de4 (initial push)
 import html2pdf from 'html2pdf.js';
 
 const dataURLtoFile = (dataurl, filename) => {
@@ -20,11 +16,7 @@ const dataURLtoFile = (dataurl, filename) => {
     return new File([u8arr], filename, {type:mime});
 }
 
-<<<<<<< HEAD
 const LetterPreviewDialog = ({ isOpen, onOpenChange, imageDataUrl, letterData, letterType, pageTitle, onLinkGenerated }) => {
-=======
-const LetterPreviewDialog = ({ isOpen, onOpenChange, imageDataUrl, letterData, letterType }) => {
->>>>>>> cd51de4 (initial push)
     const { toast } = useToast();
     const { user, schoolId } = useAuth();
     const [isSharing, setIsSharing] = useState(false);
@@ -39,20 +31,12 @@ const LetterPreviewDialog = ({ isOpen, onOpenChange, imageDataUrl, letterData, l
             margin: 0,
             filename: `${letterType}_${Date.now()}.pdf`,
             image: { type: 'jpeg', quality: 0.98 },
-<<<<<<< HEAD
             html2canvas: { scale: 3, useCORS: true, logging: false },
             jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
         };
         html2pdf().from(element).set(opt).save().then(() => {
             setIsExporting(false);
             toast({ title: "تم التصدير بنجاح" });
-=======
-            html2canvas: { scale: 2, useCORS: true },
-            jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
-        };
-        html2pdf().from(element).set(opt).save().then(() => {
-            setIsExporting(false);
->>>>>>> cd51de4 (initial push)
         }).catch(err => {
             console.error(err);
             toast({
@@ -65,7 +49,6 @@ const LetterPreviewDialog = ({ isOpen, onOpenChange, imageDataUrl, letterData, l
     };
     
     const handleShare = async () => {
-<<<<<<< HEAD
         if (!imageDataUrl) {
             toast({ title: "خطأ", description: "لا توجد صورة للمشاركة.", variant: "destructive" });
             return;
@@ -75,8 +58,6 @@ const LetterPreviewDialog = ({ isOpen, onOpenChange, imageDataUrl, letterData, l
             return;
         }
 
-=======
->>>>>>> cd51de4 (initial push)
         setIsSharing(true);
         try {
             const file = dataURLtoFile(imageDataUrl, `${letterType}_${Date.now()}.png`);
@@ -93,21 +74,15 @@ const LetterPreviewDialog = ({ isOpen, onOpenChange, imageDataUrl, letterData, l
                 .getPublicUrl(filePath);
 
             const share_token = crypto.randomUUID();
-<<<<<<< HEAD
             const currentDate = new Date().toLocaleDateString('ar-SA', { year: 'numeric', month: 'long', day: 'numeric' });
             const letterFinalName = `${pageTitle}: ${letterData.title} - ${currentDate}`;
 
             const { data: insertedData, error: dbError } = await supabase
-=======
-
-            const { error: dbError } = await supabase
->>>>>>> cd51de4 (initial push)
                 .from('generated_letters')
                 .insert({
                     user_id: user.id,
                     school_id: schoolId,
                     letter_type: letterType,
-<<<<<<< HEAD
                     letter_data: {...letterData, name: letterFinalName},
                     image_url: publicUrl,
                     share_token: share_token,
@@ -123,32 +98,12 @@ const LetterPreviewDialog = ({ isOpen, onOpenChange, imageDataUrl, letterData, l
             toast({ title: "تم إنشاء رابط المشاركة بنجاح!", variant: "success" });
             onOpenChange(false);
             onLinkGenerated(insertedData.id, letterFinalName, share_token);
-=======
-                    letter_data: letterData,
-                    image_url: publicUrl,
-                    share_token: share_token,
-                });
-            
-            if (dbError) throw dbError;
-
-            const shareUrl = `${window.location.origin}/letter/view/${share_token}`;
-            await navigator.clipboard.writeText(shareUrl);
-
-            toast({
-                title: "تم إنشاء الرابط بنجاح!",
-                description: "تم نسخ رابط المشاركة إلى الحافظة.",
-            });
->>>>>>> cd51de4 (initial push)
 
         } catch (error) {
             console.error("Sharing error:", error);
             toast({
                 title: "خطأ في المشاركة",
-<<<<<<< HEAD
                 description: error.message || "فشلت عملية إنشاء رابط المشاركة. يرجى المحاولة مرة أخرى.",
-=======
-                description: "فشلت عملية إنشاء رابط المشاركة. يرجى المحاولة مرة أخرى.",
->>>>>>> cd51de4 (initial push)
                 variant: "destructive"
             });
         } finally {
@@ -158,7 +113,6 @@ const LetterPreviewDialog = ({ isOpen, onOpenChange, imageDataUrl, letterData, l
 
     return (
         <Dialog open={isOpen} onOpenChange={onOpenChange}>
-<<<<<<< HEAD
             <DialogContent className="max-w-4xl h-[90vh] flex flex-col p-2 sm:p-6">
                 <DialogHeader className="px-4 pt-4 sm:px-0 sm:pt-0">
                     <DialogTitle>معاينة {pageTitle}</DialogTitle>
@@ -183,28 +137,6 @@ const LetterPreviewDialog = ({ isOpen, onOpenChange, imageDataUrl, letterData, l
                             مشاركة وحفظ
                         </Button>
                     )}
-=======
-            <DialogContent className="max-w-4xl h-[90vh] flex flex-col">
-                <DialogHeader>
-                    <DialogTitle>معاينة التبليغ الإداري</DialogTitle>
-                    <DialogDescription>
-                        تأكد من صحة البيانات قبل الحفظ أو المشاركة.
-                    </DialogDescription>
-                </DialogHeader>
-                <div className="flex-grow overflow-auto border rounded-md" ref={previewRef}>
-                    {imageDataUrl && <img src={imageDataUrl} alt="معاينة التبليغ" className="w-full h-auto" />}
-                </div>
-                <DialogFooter className="flex-shrink-0 pt-4 gap-2">
-                    <Button variant="outline" onClick={() => onOpenChange(false)}>إغلاق</Button>
-                    <Button onClick={handleExport} disabled={isExporting}>
-                        {isExporting ? <Loader2 className="ml-2 h-4 w-4 animate-spin" /> : <Download className="ml-2 h-4 w-4" />}
-                        تصدير PDF
-                    </Button>
-                    <Button onClick={handleShare} disabled={isSharing} className="bg-green-600 hover:bg-green-700">
-                        {isSharing ? <Loader2 className="ml-2 h-4 w-4 animate-spin" /> : <Share2 className="ml-2 h-4 w-4" />}
-                        مشاركة رابط التبليغ
-                    </Button>
->>>>>>> cd51de4 (initial push)
                 </DialogFooter>
             </DialogContent>
         </Dialog>

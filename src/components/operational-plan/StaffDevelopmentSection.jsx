@@ -272,11 +272,7 @@ const StaffDevelopmentSection = ({ staffDevelopment, onChange, planData }) => {
               </SelectTrigger>
               <SelectContent>
                 {TRAINING_AREAS.map((area) => (
-<<<<<<< HEAD
                   <SelectItem key={area.value} value={area.label}>{area.label}</SelectItem>
-=======
-                  <SelectItem key={area} value={area}>{area}</SelectItem>
->>>>>>> cd51de4 (initial push)
                 ))}
               </SelectContent>
             </Select>

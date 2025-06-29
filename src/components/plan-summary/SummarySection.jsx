@@ -2,11 +2,7 @@ import React, { useEffect } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 
-<<<<<<< HEAD
 const SummarySection = ({ children, id, title, icon }) => {
-=======
-const SummarySection = ({ children, id, title, icon: Icon }) => {
->>>>>>> cd51de4 (initial push)
   const controls = useAnimation();
   const [ref, inView] = useInView({ threshold: 0.1, triggerOnce: false }); 
 
@@ -27,7 +23,6 @@ const SummarySection = ({ children, id, title, icon: Icon }) => {
       transition: { duration: 0.7, ease: "circOut" } 
     }
   };
-<<<<<<< HEAD
   
   const renderIcon = () => {
     if (!icon) {
@@ -46,8 +41,6 @@ const SummarySection = ({ children, id, title, icon: Icon }) => {
     const IconComponent = icon;
     return <IconComponent className="h-8 w-8 text-white ml-4" />;
   };
-=======
->>>>>>> cd51de4 (initial push)
 
   return (
     <motion.section
@@ -56,7 +49,6 @@ const SummarySection = ({ children, id, title, icon: Icon }) => {
       variants={cardVariants}
       initial="hidden"
       animate={controls}
-<<<<<<< HEAD
       className="mb-8"
     >
       <div className="bg-white/10 backdrop-blur-xl rounded-2xl border border-white/20 shadow-2xl overflow-hidden">
@@ -70,15 +62,6 @@ const SummarySection = ({ children, id, title, icon: Icon }) => {
           {children}
         </div>
       </div>
-=======
-      className="mb-12 py-8 px-4 rounded-xl bg-white/80 backdrop-blur-xl shadow-2xl border border-gray-200/60"
-    >
-      <div className="flex items-center mb-6 pb-4 border-b-2 border-sky-200/80">
-        {Icon && <Icon className="h-8 w-8 text-sky-600 mr-4" />}
-        <h2 className="text-2xl font-bold text-sky-700">{title}</h2>
-      </div>
-      {children}
->>>>>>> cd51de4 (initial push)
     </motion.section>
   );
 };
